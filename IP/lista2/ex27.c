@@ -11,7 +11,7 @@ void ordenacaoInsercao(int *vet, int tam) {
   int chave;
   int i;
 
-    
+  int j = 1;
   for (; j < tam; j++) {
     chave = vet[j];
     i = j - 1;
