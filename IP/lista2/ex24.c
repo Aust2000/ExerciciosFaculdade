@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void vetCpy(int *org, int *dest, int tam) {
     int i = 0;
@@ -11,8 +12,8 @@ void countingSort(int *A, int tam, int k) {
     k++;
     int C[k];
 
-    int i = 0;
-    for (; i < k; i++) {
+    int i;
+    for (i = 0; i < k; i++) {
         C[i] = 0;
     }
 
@@ -25,8 +26,9 @@ void countingSort(int *A, int tam, int k) {
     }
 
     int B[tam];
-    for (i = tam - 1; i >= 1; i--) {
-        B[C[A[i]]] = A[i];
+
+    for (i = tam - 1; i >= 0; i--) {
+        B[C[A[i]] - 1] = A[i];
         C[A[i]]--;
     }
 
@@ -34,17 +36,18 @@ void countingSort(int *A, int tam, int k) {
 }
 
 int main() {
-    int tam, maior;
-    int *nums;
+    int tam, maior = -1, i;
+    int *nums = NULL;
     while (1) {
         scanf("%d", &tam);
         if (tam == 0) {
             break;
         }
-
-        nums = (int*)malloc(tam * sizeof(int));
-        int i = 0;
-        for (; i < tam; i++) {
+        do{
+            nums = (int*) malloc(tam * sizeof(int));
+        } while (nums == NULL);
+            
+        for (i = 0; i < tam; i++) {
             scanf("%d", &nums[i]);
             if (nums[i] > maior) {
                 maior = nums[i];
@@ -52,6 +55,16 @@ int main() {
         }
 
         countingSort(nums, tam, maior);
+
+        for (i = 0; i < tam; i++) {
+            printf("%d", nums[i]);
+            if (i != tam - 1) {
+                printf(" ");
+            }
+        }
+        printf("\n");
+
+        free(nums);
     }
     
     return 0;
