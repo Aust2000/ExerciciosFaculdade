@@ -14,24 +14,27 @@ void inverter(char *nome) {
     }
 }
 
-void ordenar(char **nome, int qt) {
+void ordenar(int qt, int tam, char nome[qt][tam]) {
     int j;
-    char palavraChave[qt];
+    char palavraChave[tam];
 
     int i, k = 0;
     for (i = 1; i < qt; i++) {
         strcpy(palavraChave, nome[i]);
 
         j = i - 1;
-        while (j >= 0 && tolower(nome[j][k]) >= tolower(nome[i][k])) {
-            while (tolower(nome[j][k]) == tolower(nome[i][k])) {
+        while (j >= 0) {
+            k = 0;
+            while (tolower(nome[j][k]) == tolower(palavraChave[k])) {
                 k++;
                 continue;
             }
-            
-            strcpy(nome[j + 1], nome[j]);
-            j--;
-            k = 0;
+            if (tolower(nome[j][k]) >= tolower(palavraChave[k])) {
+                strcpy(nome[j + 1], nome[j]);
+                j--;
+            } else {
+                break;
+            }
         }
 
         strcpy(nome[j + 1], palavraChave);
@@ -50,7 +53,7 @@ int main() {
         inverter(nomes[i]);
     }
 
-    ordenar(nomes, qt);
+    ordenar(qt, tam, nomes);
 
     for (i = 0; i < qt; i++) {
         printf("%s\n", nomes[i]);
