@@ -14,17 +14,37 @@ typedef struct {
     int numCreditos;
 } Estudante;
 
-void alocarString(char *ponteiro, int tamanho) {
-    ponteiro = NULL;
+char* alocarString(int tamanho) {
+    char *ponteiro = NULL;
     do {
-        ponteiro = (char*) malloc(tamanho * sizeof(char) + 1);
+        ponteiro = (char*) malloc((tamanho * sizeof(char)) + 1);
     } while (ponteiro == NULL);
+    return ponteiro;
 }
 
-void receberStringTemporaria(char *ponteiro, char *stringTemporaria) {
+char* alocarStringTemporaria(char *stringTemporaria) {
     int tamanho = strlen(stringTemporaria);
-    alocarString(ponteiro, tamanho);
+    char *ponteiro;
+    ponteiro = alocarString(tamanho);
     strcpy(ponteiro, stringTemporaria);
+    return ponteiro;
+}
+
+int pegarIndexCurso(int codigoCurso, Curso *dadosCursos, int quantidadeCursos) {
+    int i;
+    for (i = 0; i < quantidadeCursos; i++) {
+        if (dadosCursos[i].codigo == codigoCurso) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+void printarBoleto(Estudante estudante, Curso *dadosCursos, int quantidadeCursos) {
+    int indexCurso = pegarIndexCurso(estudante.codigoCurso, dadosCursos, quantidadeCursos);
+    double valorMensalidade = estudante.numCreditos * dadosCursos[indexCurso].valorPorCredito;
+    printf("Aluno(a): %s Curso: %s Num. Creditos: %d Valor Credito: %.2lf Mensalidade: %.2lf\n", estudante.nome, dadosCursos[indexCurso].nome, estudante.numCreditos, dadosCursos[indexCurso].valorPorCredito, valorMensalidade);
 }
 
 int main() {
@@ -38,7 +58,25 @@ int main() {
     for (i = 0; i < quantidadeCursos; i++) {
         scanf("%d %lf%*c", &dadosCursos[i].codigo, &dadosCursos[i].valorPorCredito);
         scanf(" %[^\n]%*c", stringTemporaria);
-        receberStringTemporaria(dadosCursos[i].nome, stringTemporaria);
+        dadosCursos[i].nome = alocarStringTemporaria(stringTemporaria);
+    }
+
+    int quantidadeEstudantes;
+    scanf("%d", &quantidadeEstudantes);
+
+    Estudante dadosEstudantes[quantidadeEstudantes];
+    for (i = 0; i < quantidadeEstudantes; i++) {
+        scanf(" %[^\n]%*c", stringTemporaria);
+        dadosEstudantes[i].nome =  alocarStringTemporaria(stringTemporaria);
+        scanf("%d %d", &dadosEstudantes[i].codigoCurso, &dadosEstudantes[i].numCreditos);
+        
+        printarBoleto(dadosEstudantes[i], dadosCursos, quantidadeCursos);
+        
+        free(dadosEstudantes[i].nome);
+    }
+
+    for (i = 0; i < quantidadeCursos; i++) {
+        free(dadosCursos[i].nome);
     }
     
     return 0;
