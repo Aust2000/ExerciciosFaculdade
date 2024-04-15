@@ -1,34 +1,37 @@
-public class PessoaFisica extends Cliente {
+public class PessoaFisica extends Pessoa {
     private String cpf;
 
 
-
-    public PessoaFisica(String nome, double saldoInicial, String cpf) {
-        super(nome, saldoInicial);
+    public PessoaFisica(String nome, int idade, double saldoInicial, String cpf) {
+        super(nome, idade, saldoInicial);
         this.cpf = cpf;
-        cpf = validarCpf(cpf);
+        validarCpf();
     }
 
 
-    private String validarCpf(String cpf) {
+    private void validarCpf() {
         if (cpf.charAt(3) != '.') {
-            cpf = inserirCaractere(cpf, '.', 3);
+            cpf = inserirCaractereNoCpf(cpf, '.', 3);
         }
         if (cpf.charAt(7) != '.') {
-            cpf = inserirCaractere(cpf, '.', 7);
+            cpf = inserirCaractereNoCpf(cpf, '.', 7);
         }
         if (cpf.charAt(11) != '-') {
-            cpf = inserirCaractere(cpf, '.', 11);
+            cpf = inserirCaractereNoCpf(cpf, '-', 11);
         }
-        return cpf;
     }
 
-    private String inserirCaractere(String string, char caractere, int index) { //not working
-        return string.substring(0, index - 1) + caractere + string.substring(index + 1, string.length() - 1);
+    
+    public String inserirCaractereNoCpf(String string, char caractere, int index) { //not working
+        if (Character.isDigit(string.charAt(index))) {
+            return string.substring(0, index) + caractere + string.substring(index, string.length());
+        }
+        return string.substring(0, index) + caractere + string.substring(index + 1, string.length());
     }
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+        validarCpf();
     }
 
     public String getCpf() {

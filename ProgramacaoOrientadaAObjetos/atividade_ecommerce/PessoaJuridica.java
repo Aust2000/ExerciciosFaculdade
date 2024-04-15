@@ -1,15 +1,11 @@
-package atividade_ecommerce;
-
-public class PessoaJuridica extends Cliente {
+public class PessoaJuridica extends Pessoa {
     private String cnpj;
 
 
-
-    public PessoaJuridica(String nome, double saldoInicial, String cnpj) {
-        super(nome, saldoInicial);
+    public PessoaJuridica(String nome, int idade, double saldoInicial, String cnpj) {
+        super(nome, idade, saldoInicial);
         this.cnpj = cnpj;
     }
-
 
     
     public String getCnpj() {
