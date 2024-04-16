@@ -9,6 +9,15 @@ public class PessoaFisica extends Pessoa {
     }
 
 
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+        validarCpf();
+    }
+    
+    public String getCpf() {
+        return cpf;
+    }
+
     private void validarCpf() {
         if (cpf.charAt(3) != '.') {
             cpf = inserirCaractereNoCpf(cpf, '.', 3);
@@ -20,21 +29,11 @@ public class PessoaFisica extends Pessoa {
             cpf = inserirCaractereNoCpf(cpf, '-', 11);
         }
     }
-
     
-    public String inserirCaractereNoCpf(String string, char caractere, int index) { //not working
+    private String inserirCaractereNoCpf(String string, char caractere, int index) { //not working
         if (Character.isDigit(string.charAt(index))) {
             return string.substring(0, index) + caractere + string.substring(index, string.length());
         }
         return string.substring(0, index) + caractere + string.substring(index + 1, string.length());
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-        validarCpf();
-    }
-
-    public String getCpf() {
-        return cpf;
     }
 }
