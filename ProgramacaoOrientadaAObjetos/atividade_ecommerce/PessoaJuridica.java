@@ -2,10 +2,10 @@ public class PessoaJuridica extends Pessoa {
     private String cnpj;
 
 
-    public PessoaJuridica(String nome, int idade, double saldoInicial, String cnpj) {
-        super(nome, idade, saldoInicial);
+    public PessoaJuridica(String nome, int idade, String endereco, String cnpj) {
+        super(nome, idade, endereco);
         this.cnpj = cnpj;
-        validaCnpj();
+        formatarCnpj();
     }
 
     
@@ -15,10 +15,10 @@ public class PessoaJuridica extends Pessoa {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
-        validaCnpj();
+        formatarCnpj();
     }
 
-    private void validaCnpj() {
+    private void formatarCnpj() {
         if (cnpj.charAt(2) != '.') {
             cnpj = inserirCaractereNoCnpj(cnpj, '.', 2);
         }
@@ -33,7 +33,8 @@ public class PessoaJuridica extends Pessoa {
         }
     }
 
-    private String inserirCaractereNoCnpj(String string, char caractere, int index) { //not working
+    // esse método está quebrando o princípio da responsabilidade única
+    private String inserirCaractereNoCnpj(String string, char caractere, int index) {
         if (Character.isDigit(string.charAt(index))) {
             return string.substring(0, index) + caractere + string.substring(index, string.length());
         }

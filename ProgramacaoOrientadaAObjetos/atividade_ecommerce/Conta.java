@@ -1,9 +1,35 @@
-public class Conta <T> {
+public class Conta {
+    public static int ultimoIdNaoUtilizado = 1;
+    
+    private int idConta;
     private double saldo;
+    private String email;
+    private Pedido pedido;
 
 
-    public Conta (double saldoInicial) {
+    public Conta (double saldoInicial, String email) {
+        idConta = ultimoIdNaoUtilizado;
+        ultimoIdNaoUtilizado++;
+
         saldo = saldoInicial;
+        this.email = email;
+    }
+
+    
+    public int getId() {
+        return idConta;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public double getSaldo() {
+        return saldo;
     }
 
 
@@ -21,4 +47,21 @@ public class Conta <T> {
         saldo -= valor;
         return valor;
     }
+
+    public void criarPedido(Produto produto, int quantidade) {
+        pedido = new Pedido(produto, quantidade);
+    }
+
+    public void concluirPedido() {
+        double valorTotal = pedido.calcularValorTotal();
+        if (valorTotal > saldo) {
+            // adicionar catcher para caso não tenha saldo na conta para realizar o pedido
+            return;
+        } else {
+            saldo -= valorTotal;
+            pedido = null;
+        }
+    }
+
+    // fazer validação do email
 }

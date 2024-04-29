@@ -1,13 +1,14 @@
-public class Pessoa {
+public abstract class Pessoa {
     private String nome;
     private int idade;
-    private Conta<Pessoa> cadastroConta;
+    private String endereco;
+    private Conta conta;
 
 
-    public Pessoa (String nome, int idade, double saldoInicial) {
+    public Pessoa (String nome, int idade, String endereco) {
         this.nome = nome;
         this.idade = idade;
-        cadastroConta = new Conta<Pessoa>(saldoInicial);
+        this.endereco = endereco;
     }
 
 
@@ -27,11 +28,24 @@ public class Pessoa {
         this.idade = idade;
     }
 
-    public Conta<Pessoa> getConta() {
-        return cadastroConta;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void refazerConta(int saldoInicial) {
-        cadastroConta = new Conta<Pessoa>(saldoInicial);
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public Conta getConta() {
+        return conta;
+    }
+
+
+    public void criarConta(double saldoInicial, String email) {
+        Conta conta = new Conta(saldoInicial, email);
+    }
+
+    public void deletarConta() {
+        conta = null;
     }
 }
