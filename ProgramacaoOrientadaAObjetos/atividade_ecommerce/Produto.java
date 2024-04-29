@@ -58,4 +58,14 @@ public class Produto {
     public void removerEstoque(int quantidade) {
         estoque -= quantidade;
     }
+
+
+    @Override
+    public String toString() {
+        return "Id: " + idProduto + "\n" +
+               "Nome: " + nome + "\n" +
+               "Descrição: " + descricao + "\n" +
+               "Preço: " + preco + "\n" +
+               "Quantidade no Estoque: " + estoque;
+    }
 }

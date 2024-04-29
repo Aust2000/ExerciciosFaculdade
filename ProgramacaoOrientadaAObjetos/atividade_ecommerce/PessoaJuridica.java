@@ -40,4 +40,12 @@ public class PessoaJuridica extends Pessoa {
         }
         return string.substring(0, index) + caractere + string.substring(index + 1, string.length());
     }
+
+    @Override
+    public String toString() {
+        return "Nome: " + super.getNome() + "\n" +
+               "Idade: " + super.getIdade() + "\n" +
+               "Endereço: " + super.getEndereco() + "\n" +
+               "CNPJ: " + cnpj;
+    }
 }

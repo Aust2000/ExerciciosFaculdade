@@ -42,7 +42,7 @@ public abstract class Pessoa {
 
 
     public void criarConta(double saldoInicial, String email) {
-        Conta conta = new Conta(saldoInicial, email);
+        conta = new Conta(saldoInicial, email);
     }
 
     public void deletarConta() {

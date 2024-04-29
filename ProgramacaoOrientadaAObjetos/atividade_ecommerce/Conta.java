@@ -20,6 +20,10 @@ public class Conta {
         return idConta;
     }
     
+    public Pedido getPedido() {
+        return pedido;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -63,5 +67,17 @@ public class Conta {
         }
     }
 
+
+    @Override
+    public String toString() {
+        String resultado = "Id: " + idConta + "\n" + 
+                           "Saldo: " + saldo + "\n" +
+                           "Email: " + email;
+        if (pedido != null) {
+            resultado += "\n" + "Id Pedido: " + pedido.getId();
+        }
+        
+        return resultado;
+    }
     // fazer validação do email
 }

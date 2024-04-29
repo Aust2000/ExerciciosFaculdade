@@ -31,4 +31,10 @@ public class Item {
     public double calcularSubtotal() {
         return produto.getPreco() * quantidade;
     }
+
+
+    @Override
+    public String toString() {
+        return produto.getNome() + " x " + quantidade;
+    }
 }

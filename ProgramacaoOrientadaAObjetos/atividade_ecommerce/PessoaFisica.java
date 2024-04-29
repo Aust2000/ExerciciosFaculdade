@@ -47,11 +47,11 @@ public class PessoaFisica extends Pessoa {
         if (rg.charAt(2) != '.') {
             rg = inserirCaractere(rg, '.', 2);
         }
-        if (rg.charAt(5) != '.') {
-            rg = inserirCaractere(rg, '.', 5);
+        if (rg.charAt(6) != '.') {
+            rg = inserirCaractere(rg, '.', 6);
         }
-        if (rg.charAt(11) != '.') {
-            rg = inserirCaractere(rg, '-', 11);
+        if (rg.charAt(10) != '-') {
+            rg = inserirCaractere(rg, '-', 10);
         }
     }
     
@@ -61,5 +61,15 @@ public class PessoaFisica extends Pessoa {
             return string.substring(0, index) + caractere + string.substring(index, string.length());
         }
         return string.substring(0, index) + caractere + string.substring(index + 1, string.length());
+    }
+
+    @Override
+    public String toString() {
+        return "Nome: " + super.getNome() + "\n" +
+               "Idade: " + super.getIdade() + "\n" +
+               "Endereço: " + super.getEndereco() + "\n" +
+               "IdConta: " + super.getConta().getId() + "\n" +
+               "CPF: " + cpf + "\n" + 
+               "RG: " + rg;
     }
 }

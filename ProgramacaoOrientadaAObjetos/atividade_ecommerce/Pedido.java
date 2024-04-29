@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
@@ -5,7 +6,7 @@ public class Pedido {
     
     private int idPedido;
     private String status;
-    private List<Item> itens;
+    private List<Item> itens = new ArrayList<>();
 
     public Pedido(Produto produto, int quantidadeProdutoInicial) {
         idPedido = ultimoIdNaoUtilizado;
@@ -42,5 +43,20 @@ public class Pedido {
             valorTotal += itens.get(i).calcularSubtotal();
         }
         return valorTotal;
+    }
+
+
+    @Override
+    public String toString() {
+        String resultado = "Id: " + idPedido + "\n" + 
+                           "Status: " + status + "\n" +
+                           "Valor total: " + calcularValorTotal() + "\n" +
+                           "Itens: ";
+        for (int i = 0; i < itens.size(); i++) {
+            resultado += "\n- ";
+            resultado += itens.get(i) + "\n";
+        }
+        
+        return resultado;
     }
 }
