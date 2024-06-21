@@ -18,21 +18,22 @@ bool comp(query x, query y) {
     return x.left/K < y.left/K;
 }
 
-vector<int> vet, answer;
+vector<int> vet, answer, newVet;
 vector<query> queries;
-int rec[N];
 int sum = 0;
 
 void add(int x) {
-    sum -= rec[vet[x]] / 2;
-    rec[vet[x]]++;
-    sum += rec[vet[x]] / 2;
+    // if(rec[vet[x]] == 0) {
+    //     sum++;
+    // }
+    // rec[vet[x]]++;
 }
 
 void rmv(int x) {
-    sum -= rec[vet[x]] / 2;
-    rec[vet[x]]--;
-    sum += rec[vet[x]] / 2;
+    // rec[vet[x]]--;
+    // if (rec[vet[x]] == 0) {
+    //     sum--;
+    // }
 }
 
 int calculo() {
@@ -47,7 +48,13 @@ int main() {
     vet.resize(vectorSize);
 
     for (int i = 0; i < vectorSize; i++) {
-        cin >> vet[i];
+        cin >> vet[i], newVet.push_back(vet[i]);
+    }
+
+    sort(newVet.begin(), newVet.end());
+
+    for (int i = 0; i < vectorSize; i++) {
+        vet[i] = lower_bound(newVet.begin(), newVet.end(), vet[i]) - newVet.begin();
     }
 
     for (int i = 0; i < queryAmount; i++) {
