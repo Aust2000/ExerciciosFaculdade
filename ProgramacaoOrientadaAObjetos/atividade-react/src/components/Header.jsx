@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 export function Header({title}) {
     return (
         <header className="p-5 flex justify-between">
@@ -5,16 +7,16 @@ export function Header({title}) {
             <nav>
               <ul className="flex gap-5">
                 <li>
-                  <a href="">Início</a>
+                  <NavLink to="/">Início</NavLink>
                 </li>
                 <li>
-                  <a href="">Produtos</a>
+                  <NavLink to="/product">Produtos</NavLink>
                 </li>
                 <li>
-                  <a href="">Sobre</a>
+                  <NavLink to="">Sobre</NavLink>
                 </li>
                 <li>
-                  <a href="">Contato</a>
+                  <NavLink to="">Contato</NavLink>
                 </li>
               </ul>
             </nav>
